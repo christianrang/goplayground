@@ -15,6 +15,7 @@ var (
 )
 
 type Configuration struct {
+	Name string   `mapstructure:"name"`
 	Func []string `mapstructure:"func"`
 }
 
@@ -70,9 +71,9 @@ var UtilityMap = map[string]Utility{
 }
 
 func Hello() {
-	fmt.Println("hello")
+	fmt.Printf("Hello %s!\n", configuration.Name)
 }
 
 func Goodbye() {
-	fmt.Println("goodbye")
+	fmt.Printf("Goodbye %s!\n", configuration.Name)
 }
