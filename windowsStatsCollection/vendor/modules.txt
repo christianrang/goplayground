@@ -1,2 +1,9 @@
+# github.com/StackExchange/wmi v1.2.1
+github.com/StackExchange/wmi
+# github.com/go-ole/go-ole v1.2.5
+github.com/go-ole/go-ole
+github.com/go-ole/go-ole/oleutil
 # github.com/leoluk/perflib_exporter v0.1.0
 github.com/leoluk/perflib_exporter/perflib
+# golang.org/x/sys v0.0.0-20190916202348-b4ddaad3f8a3
+golang.org/x/sys/windows

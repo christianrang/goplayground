@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"strings"
 
 	"github.com/leoluk/perflib_exporter/perflib"
 	// "os"
@@ -35,18 +34,33 @@ func main() {
 
 	obj, _ := perflib.QueryPerformanceData("Global")
 	for _, item := range obj {
-		if strings.Contains(item.Name, "Processor") {
-			fmt.Println("Name:        ", item.Name)
-			fmt.Println("HelpText:    ", item.HelpText)
-			fmt.Println("CounterDefs: ")
+		// if item.Name == "Processor" || item.Name == "Processor Information" {
+		if item.Name == "Processor Information" {
+			// fmt.Println("Name:        ", item.Name)
+			// fmt.Println("HelpText:    ", item.HelpText)
 			for _, instance := range item.Instances {
-				fmt.Println("  Instance Name: ", instance.Name)
+				var (
+					total int64
+					user  int64
+				)
+				// fmt.Println("  Instance Name: ", instance.Name)
 				for _, counter := range instance.Counters {
-					fmt.Println("    Counter Value: ", counter.Value)
-					fmt.Println("    Counter Def Name: ", counter.Def.Name)
+					// fmt.Println("    Counter Def Name: ", counter.Def.Name)
+					// fmt.Println("    Counter Value: ", counter.Value)
+					if counter.Def.Name == "% User Time" {
+						user = counter.Value
+					}
+					if counter.Def.Name == "% Processor Time" {
+						total = counter.Value
+					}
+
+				}
+				if instance.Name == "_Total" && total > 0 {
+					fmt.Println("User:      ", user)
+					fmt.Println("Total:     ", total)
+					fmt.Println("Perc user: ", float64(float64(user)/float64(total)))
 				}
 			}
-			fmt.Println()
 		}
 	}
 }
