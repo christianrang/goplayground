@@ -18,6 +18,7 @@ func main() {
 	}
 
 	fmt.Printf("%+v\n", values)
+	fmt.Printf("%+v\n", values.UserTime.Nanoseconds())
 }
 
 func GetRUsage() (windows.Rusage, error) {
