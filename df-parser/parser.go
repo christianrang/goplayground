@@ -1,36 +1,5 @@
 package dfparser
 
-type DFInfo struct {
-	Name          string
-	Size          string
-	Used          string
-	Available     string
-	UsePercentage string
-	Mounted       string
-}
-
-// func Parse(output string) {
-// 	var dfinfo []DFInfo
-// 	var tmp DFInfo
-// 	var currentColumn uint32
-// 	for i := 0; i < len(output); i++ {
-// 		switch char := output[i]; char {
-// 		case '\n':
-// 			dfinfo = append(dfinfo, tmp)
-// 			tmp = DFInfo{}
-// 			break
-// 		case ' ':
-// 			currentColumn += 1
-// 			// Skip the spaces
-// 			for j := i; output[j] == ' '; j++ {
-// 				i = j
-// 			}
-// 			break
-// 		}
-//
-// 	}
-// }
-
 type Disk struct {
 	Name          string
 	Size          string
