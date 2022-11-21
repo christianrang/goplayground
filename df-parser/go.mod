@@ -1,3 +1,3 @@
-module df-parser
+module dfparser
 
 go 1.18
