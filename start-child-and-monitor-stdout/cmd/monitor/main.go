@@ -11,9 +11,9 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var count int = 0
-
 func main() {
+	monitor := Monitor{Count: 0}
+
 	go func() {
 		cmd := exec.Command("go", "run", "cmd/child/main.go")
 
@@ -25,9 +25,9 @@ func main() {
 			m := scanner.Text()
 			msg := stdoutLine(m)
 			if msg.Value == "asdf" {
-				count++
+				monitor.Count++
 			}
-			log.Printf("we have seen %d, 'asdf' messages", count)
+			log.Printf("we have seen %d, 'asdf' messages", monitor.Count)
 			log.Printf("%v", msg)
 		}
 
@@ -37,10 +37,14 @@ func main() {
 	r := gin.Default()
 	r.GET("/ping", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
-			"message": count,
+			"message": monitor.Count,
 		})
 	})
 	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+}
+
+type Monitor struct {
+	Count int
 }
 
 type Message struct {
